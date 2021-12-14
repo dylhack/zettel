@@ -1,19 +1,18 @@
-use chrono::prelude::{
-    DateTime,
-    Local,
-};
+use chrono::Local;
 
 fn get_now() -> (String, String) {
+    // The formats are composed by following the strftime specifiers
+    // https://docs.rs/chrono/latest/chrono/format/strftime/index.html#specifiers
+    // regular_format = "202112141345"
+    // spaced_format = "2021-12-14 1345"
     let regular_format = "%Y%m%d%H%M";
     let spaced_format = "%Y-%m-%d %H%M";
 
-    let now: DateTime<Local> = Local::now();
-    let regular = now.format(regular_format);
-    let spaced = now.format(spaced_format);
-    let regular_str = regular.to_string();
-    let spaced_str = spaced.to_string();
+    let now = Local::now();
+    let regular = now.format(regular_format).to_string();
+    let spaced = now.format(spaced_format).to_string();
 
-    return (regular_str, spaced_str);
+    return (regular, spaced);
 }
 
 fn main() {
@@ -21,4 +20,3 @@ fn main() {
 
     println!("{} ({})", regular, spaced)
 }
-
